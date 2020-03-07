@@ -4,6 +4,11 @@ require("functions.php");
 
 head("Add a new POI");
 
+?>
+
+<div class="container constrained">
+<?php
+
 if (ctype_alnum(trim(str_replace(' ','',$_POST["name"]))) && ctype_alnum(trim(str_replace(' ','',$_POST["type"]))) && ctype_alnum(trim(str_replace(' ','',$_POST["description"])))) {
 
     $name = $_POST["name"];
@@ -21,7 +26,7 @@ if (ctype_alnum(trim(str_replace(' ','',$_POST["name"]))) && ctype_alnum(trim(st
 
         echo "<h1 class='wide'>POI added successfully</h1>";
         
-        echo "<a href='poi.php?title=$name' class='poi card wide'>
+        echo "<a href='poi.php?name=$name' class='poi card wide'>
                 <article>
                     <h3 class='title'>$name</h3>
                     <p class='type'>$type</p>
@@ -39,6 +44,10 @@ else {
     echo "<h1 class='wide'>We only allow letters, numbers, and spaces in our fields</h1>";
     echo "<h3 class='wide'><a href='add_new.php'>Go back</a></h3>";
 }
+
+?>
+</div>
+<?php
 
 foot();
 

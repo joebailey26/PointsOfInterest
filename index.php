@@ -1,40 +1,12 @@
 <?php 
-
 require("functions.php");
 
 head("Home");
 ?>
-<article class="poi card">
-    <h3 class="title">New York</h3>
-    <p class="type">city</p>
-    <div class="location">
-        <p class="region">NY</p>
-        <p class="seperator">, </p>
-        <p class="country">USA</p>
-    </div>
-    <p class="description">A very interesting place</p>
-</article>
-<article class="poi card">
-    <h3 class="title">New York</h3>
-    <p class="type">city</p>
-    <div class="location">
-        <p class="region">NY</p>
-        <p class="seperator">, </p>
-        <p class="country">USA</p>
-    </div>
-    <p class="description">A very interesting place</p>
-</article>
-<article class="poi card">
-    <h3 class="title">New York</h3>
-    <p class="type">city</p>
-    <div class="location">
-        <p class="region">NY</p>
-        <p class="seperator">, </p>
-        <p class="country">USA</p>
-    </div>
-    <p class="description">A very interesting place</p>
-</article>
+<div class="container">
+    <h1 class="wide">Points Of Interest</h1>
+    <p class="wide">World's largest travel platform. Browse hundreds of millions of traveller reviews and opinions.</p>
+</div>
 <?php
-
 foot();
 ?>

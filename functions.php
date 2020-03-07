@@ -7,6 +7,17 @@
         }
     }
 
+    function user() {
+        if (isset($_SESSION["user"])) {
+            return "<a href='my_account.php'>My Account</a>
+                    <a href='logout.php'>Log Out</a>";
+        }
+        else {
+            return "<a href='login.php'>Log In</a>
+                    <a href='sign_up.php'>Sign Up</a>";
+        }
+    }
+
     function head($name) {
         echo "<!DOCTYPE html>
                 <html lang='en-GB'>
@@ -24,23 +35,15 @@
                                 <a href='add_new.php'".page($name, "Add a new POI").">Add a new POI</a>
                                 <a href='search.php'".page($name, "Search").">Search</a>
                             </div>
-                            <div class='user_nav'>
-                                <a href='login.php'>Log In</a>
-                                <a href='sign_up.php'>Sign Up</a>
-                                <a href='my_account.php'>My Account</a>
-                                <a href='logout.php'>Log Out</a>
-                            </div>
+                            <div class='user_nav'>".user()."</div>
                         </div>
                     </nav>
                 <main>
-                <div class='container'>
                 ";
     }
 
     function foot() {
-        echo "
-            </div>
-            </main>
+        echo "</main>
             <footer>
                 <div class='container'>
                     <div class='copyright'>© ".date("Y")." Points of Interest. All rights reserved.</div>
