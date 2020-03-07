@@ -2,6 +2,8 @@
 
 require("functions.php");
 
+if (isset($_SESSION["user"])) {
+
 head("Add a new POI");
 
 ?>
@@ -20,9 +22,9 @@ if (ctype_alnum(trim(str_replace(' ','',$_POST["name"]))) && ctype_alnum(trim(st
         require("database_connection.php");
 
         // Send an SQL query to the database server
-        $statement = $conn->prepare("insert into pointsofinterest (name, type, description) values (?, ?, ?)" );
+        $statement = $conn->prepare("insert into pointsofinterest (name, type, description, username) values (?, ?, ?, ?)" );
 
-        $statement->execute([$name, $type, $description]);
+        $statement->execute([$name, $type, $description, $_SESSION["user"]]);
 
         echo "<h1 class='wide'>POI added successfully</h1>";
         
@@ -31,6 +33,11 @@ if (ctype_alnum(trim(str_replace(' ','',$_POST["name"]))) && ctype_alnum(trim(st
                     <h3 class='title'>$name</h3>
                     <p class='type'>$type</p>
                     <p class='description'>$description</p>
+                    <form class='recommend' name='recommend' action='recommend.php' method='post'>
+                        <input name='value' type='hidden' value='1' />
+                        <input name='name' type='hidden' value='$name' />
+                        <input type='submit' value='+'/>
+                    </form>
                 </article>
             </a>";
         echo "<h3  class='wide'><a href='add_new.php'>Go back</a></h3>";
@@ -50,5 +57,10 @@ else {
 <?php
 
 foot();
+}
+
+else {
+    header("Location: signup.php?ref=add_new");
+}
 
 ?>

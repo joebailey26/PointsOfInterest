@@ -64,6 +64,13 @@ main {
     min-height: calc(100vh - 58px - 63px);
 }
 
+main .container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 1rem;
+    padding: 3rem 1em;
+}
+
 nav {
     position: sticky;
     top: 0;
@@ -109,18 +116,11 @@ nav a:last-of-type {
     justify-self: end;
 }
 
-main .container {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-gap: 1rem;
-    padding: 3rem 1em;
-}
-
 .poi {
     min-height: 150px;
     text-align: center;
     grid-column: span 4;
-    padding: 16px 0;
+    padding: 16px;
     color: var(--primary-dark-color)
 }
 
@@ -142,10 +142,6 @@ main .container {
 
 .title {
     margin-bottom: 0;
-}
-
-.location p {
-    display: inline;
 }
 
 .seperator {
@@ -178,6 +174,15 @@ input[type="submit"] {
 
 input[type="submit"]:disabled {
     color: var(--secondary-dark-color);
+}
+
+.recommend input[type="submit"] {
+    border-radius: 50%;
+    float: right;
+    font-size: 2.5rem;
+    padding: 0;
+    line-height: 2.5rem;
+    width: 2.5rem;
 }
 
 @media (max-width: 1280px) {

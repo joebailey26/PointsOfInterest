@@ -2,6 +2,8 @@
 
 require("functions.php");
 
+if (isset($_SESSION["user"])) {
+
 head("Add a new POI");
 
 ?>
@@ -26,5 +28,9 @@ head("Add a new POI");
 <?php
 
 foot();
+}
 
+else {
+    header("Location: signup.php?ref=add_new");
+}
 ?>

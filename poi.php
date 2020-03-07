@@ -21,12 +21,12 @@ if (ctype_alnum(trim(str_replace(' ','',$_GET["name"])))) {
                 <article class='poi card wide single'>
                     <h1 class='title'>$name</h3>
                     <p class='type'>".$row["type"]."</p>
-                    <div class='location'>
-                        <p class='region'>".$row["region"]."</p>
-                        <p class='seperator'>, </p>
-                        <p class='country'>".$row["country"]."</p>
-                    </div>
                     <p class='description'>".$row["description"]."</p>
+                    <form class='recommend' name='recommend' action='recommend.php' method='post'>
+                        <input name='value' type='hidden' value='1' />
+                        <input name='name' type='hidden' value='$name' />
+                        <input type='submit' value='+'/>
+                    </form>
                 </article>
             </div>";
         }
