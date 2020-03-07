@@ -16,7 +16,7 @@
                     <title>$name | Points of Interest</title>
                     <link href='assets/css/main.css' rel='stylesheet' />
                 </head>
-                <body>
+                <body class='".str_replace(" ", "_", $name)."'>
                     <nav>
                         <div class='container'>
                             <div class='main_nav'>
@@ -26,6 +26,7 @@
                             </div>
                             <div class='user_nav'>
                                 <a href='login.php'>Log In</a>
+                                <a href='sign_up.php'>Sign Up</a>
                                 <a href='my_account.php'>My Account</a>
                                 <a href='logout.php'>Log Out</a>
                             </div>

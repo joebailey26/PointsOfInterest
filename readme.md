@@ -1,4 +1,4 @@
-# PHP Lessons
+# Points Of Interest
 
 ## Installation
 

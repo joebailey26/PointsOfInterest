@@ -8,7 +8,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    color: #212121;
+    color: var(--primary-dark-color);
     font-size: 16px;
     background-color: var(--secondary-light-color);
 }
@@ -18,16 +18,25 @@ body {
 }
 
 a {
-    color: var(--primary-dark-color);
+    color: var(--primary-color);
     text-decoration: none;
+}
+
+a:hover {
+    color: var(--primary-dark-color);
 }
 
 p {
     text-transform: capitalize;
 }
 
+h3 {
+    margin: 1rem 0;
+}
+
 .container {
     max-width: 1280px;
+    padding: 0 1em;
     margin: auto;
 }
 
@@ -84,17 +93,31 @@ main .container {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-gap: 1rem;
-    padding: 3rem 0;
+    padding: 3rem 1em;
 }
 
-article {
-    background-color: #ffffff;
-    border-radius: 24px;
-    min-height: 240px;
-    display: grid;    
-    justify-content: center;
+.poi {
+    min-height: 150px;
     text-align: center;
     grid-column: span 4;
+    padding: 16px 0;
+    color: var(--primary-dark-color)
+}
+
+.poi:hover {
+    color: var(--primary-dark-color)
+}
+
+.type {
+    color: var(--secondary-dark-color)
+}
+
+.type:hover {
+    color: var(--secondary-dark-color)
+}
+
+.title {
+    margin-bottom: 0;
 }
 
 .location p {
@@ -103,4 +126,73 @@ article {
 
 .seperator {
     margin-left: -0.25em;
+}
+
+.Add_a_new_POI main .container {
+    max-width: 600px;
+}
+
+.wide {
+    grid-column: 1/-1;
+    width: 100%
+}
+
+.card {
+    border-radius: 1.5em;
+    background-color: #ffffff;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.card:hover, .card:focus {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+input, textarea {
+    display: block;
+    margin: 1em 0;
+    width: 100%;
+    border: 0;
+    padding: 0.75em 1.25em;
+    font-family: sans-serif;
+    font-size: 1rem;
+}
+
+textarea {
+    min-height: 125px;
+    resize: vertical;
+}
+
+input[type="submit"] {
+    width: auto;
+    margin: auto;
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    cursor: pointer;
+}
+
+input[type="submit"]:disabled {
+    color: var(--secondary-dark-color);
+}
+
+@media (max-width: 1280px) {
+    nav .container, footer .container {
+        grid-auto-flow: row;
+    }
+
+    .main_nav, .user_nav {
+        justify-self: center;
+        padding: 1em 0;
+    }
+
+    main .container {
+        grid-template-columns: repeat(8, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    main .container {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
