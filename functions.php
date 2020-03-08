@@ -7,14 +7,19 @@
         }
     }
 
-    function user() {
-        if (isset($_SESSION["user"])) {
-            return "<a href='my_account.php'>My Account</a>
+    function user($name) {
+        if (isset($_SESSION["admin"])) {
+            return "<a href='my_account.php'".page($name, "My Account").">My Account</a>
+                    <a href='reviews.php'".page($name, "Reviews").">Reviews</a>
+                    <a href='logout.php'>Log Out</a>";
+        }
+        elseif (isset($_SESSION["user"])) {
+            return "<a href='my_account.php'".page($name, "My Account").">My Account</a>
                     <a href='logout.php'>Log Out</a>";
         }
         else {
-            return "<a href='login.php'>Log In</a>
-                    <a href='sign_up.php'>Sign Up</a>";
+            return "<a href='login.php'".page($name, "Log In").">Log In</a>
+                    <a href='sign_up.php'".page($name, "Sign Up").">Sign Up</a>";
         }
     }
 
@@ -35,7 +40,7 @@
                                 <a href='add_new.php'".page($name, "Add a new POI").">Add a new POI</a>
                                 <a href='search.php'".page($name, "Search").">Search</a>
                             </div>
-                            <div class='user_nav'>".user()."</div>
+                            <div class='user_nav'>".user($name)."</div>
                         </div>
                     </nav>
                 <main>

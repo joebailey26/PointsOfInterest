@@ -60,7 +60,7 @@ foot();
 }
 
 else {
-    header("Location: signup.php?ref=add_new");
+    header("Location: sign_up.php?ref=add_new");
 }
 
 ?>

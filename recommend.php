@@ -29,7 +29,7 @@ if (ctype_digit(trim(str_replace(' ','',$_POST["value"]))) && ctype_alnum(trim(s
     };
 }
 else {
-    return "null";
+    return null;
 }
 
 ?>

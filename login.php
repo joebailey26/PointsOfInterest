@@ -1,22 +1,31 @@
 <?php
     include("functions.php"); 
+
+    head("Log In");
+
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>HitTastic! Login</title>
-</head>
-<body>
-    <h1>Log in to HitTastic!</h1>
-    <form method="POST" action="login_results.php">
-        <label for="username">Username:</label>
-        <input name="username" id="username" required/>
-        <br/>
-        <label for="password">Password:</label>
-        <input name="password" id="password" type="password" required/>
-        <br/>
-        <input type="submit" value="Go!" />
+<div class="container constrained">
+<?php if (!isset($_SESSION["user"])) { ?>
+    <h1 class="wide">Log In to Points Of Interest</h1>
+    <form method="POST" action="login_results.php" class='wide'>
+        <label>
+            Username:
+            <input type="text" placeholder="Han Solo" required class="card" name="username" />
+        </label>
+        <label>
+            Password:
+            <input type="password" required class="card" name="password" />
+        </label>
+        <input type="submit" value="Sign Up!" class="card"/>
     </form>
-    <?php links("Login")?>
-</body>
-</html>
+<?php 
+    }
+    else {
+        echo "<h1 class='wide'>You're already logged in!</h1>";
+    };
+?>
+</div>
+<?php
+    foot(); 
+    
+?>
