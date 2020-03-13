@@ -2,7 +2,9 @@
 
 require("functions.php");
 
-head("Add a new POI");
+if (isset($_SESSION["user"])) {
+
+    head("Add a new POI");
 
 ?>
 <div class="container constrained">
@@ -26,4 +28,9 @@ head("Add a new POI");
 <?php
 
 foot();
+}	
+
+else {	
+    header("Location: sign_up.php?ref=add_new");	
+}
 ?>

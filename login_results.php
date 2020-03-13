@@ -25,7 +25,7 @@
                     header("Location: my_account.php");
                 }
                 else {
-                    head("Sign Up");
+                    head("Log In");
                     echo "<div class='container'><h3 class='wide' style='text-align:center'>Username or Password incorrect.</h3></div>";
                     foot();
                 }
@@ -37,7 +37,7 @@
         }
     }
     else {
-        head("Sign Up");
+        head("Log In");
         echo "<div class='container'><h3 class='wide' style='text-align:center'>We only allow letters, numbers, and spaces. Please try again.</h3></div>";
         foot();
     }

@@ -1,5 +1,9 @@
 {
     "require": {
-        "vlucas/phpdotenv": "^4.1"
+        "vlucas/phpdotenv": "^4.1",
+        "slim/slim": "^4.3",
+        "slim/psr7" : "^0.6.0",
+        "slim/http" :" ^1.0",
+        "slim/php-view": "^2.2"
     }
 }
