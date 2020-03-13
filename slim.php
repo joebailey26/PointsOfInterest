@@ -34,18 +34,23 @@ $view = new \Slim\Views\PhpRenderer('views');
 $app->post('/add_review', function (Request $req, Response $res) use($conn) {
     $post = $req->getParsedBody();
 
-    $check = $conn->prepare("SELECT * FROM pointsofinterest WHERE ID=?");
-    $check->execute([$post["poi_id"]]);
+    if (ctype_alnum(trim(str_replace(' ','',$_POST["review"])))) {
+        $check = $conn->prepare("SELECT * FROM pointsofinterest WHERE ID=?");
+        $check->execute([$post["poi_id"]]);
 
-    if ($row=$check->fetch()) {
-        $stmt = $conn->prepare("INSERT INTO poi_reviews (review, poi_id, approved) VALUES (?, ?, 0)");
-        $stmt->execute([$post["review"], $post["poi_id"]]);
+        if ($row=$check->fetch()) {
+            $stmt = $conn->prepare("INSERT INTO poi_reviews (review, poi_id, approved) VALUES (?, ?, 0)");
+            $stmt->execute([$post["review"], $post["poi_id"]]);
 
-        $res->getBody()->write("<p class='wide'>Review added successfuly. Please wait for it to be approved.</p>");
+            $res->getBody()->write("<p class='wide'>Review added successfuly. Please wait for it to be approved.</p>");
+        }
+        else {
+            $res->getBody()->write("<p class='wide'>Something went wrong please try again.</p>");
+        };
     }
     else {
-        $res->getBody()->write("<p class='wide'>Something went wrong please try again.</p>");
-    };
+        $res->getBody()->write("<p class='wide'>We only allow letters, numbers, and spaces. Please try again.</p>");
+    }
     
     return $res;
 });
@@ -62,9 +67,9 @@ $app->post('/recommend', function (Request $req, Response $res) use($conn) {
     };
 
     // Send an SQL query to the database server
-    $statement_two = $conn->prepare("UPDATE pointsofinterest SET recommended=? WHERE name=?" );
+    $statement_two = $conn->prepare("UPDATE pointsofinterest SET recommended=$recommended WHERE name=?" );
 
-    $statement_two->execute([$recommended, $post["name"]]);
+    $statement_two->execute([$post["name"]]);
 
 
     $res->getBody()->write("<input disabled type='submit' value='&check;' title='Recommend Me'>");
