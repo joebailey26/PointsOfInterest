@@ -157,6 +157,9 @@ input, textarea {
     font-family: sans-serif;
     font-size: 1rem;
 }
+input:-internal-autofill-selected {
+    background-color: #ffffff;
+}
 
 textarea {
     min-height: 125px;
