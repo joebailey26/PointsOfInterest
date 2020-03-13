@@ -31,18 +31,31 @@ $app->setBasePath('/~assign217/slim');
 // Create our PHP renderer object
 $view = new \Slim\Views\PhpRenderer('views');
 
-$app->get('/add_review', function (Request $req, Response $res, array $args) use($conn) {
-    $stmt = $conn->prepare("INSERT INTO poi_reviews (review, poi_id, approved) VALUES (?, ?, 0)");
-    $stmt->execute([$args["review"], $args["poi_review"]]);
+$app->post('/add_review', function (Request $req, Response $res) use($conn) {
+    $post = $req->getParsedBody();
 
-    $res->getBody()->write("<p class='wide'>Review added successfuly. Please wait for it to be approved.</p>");
+    $check = $conn->prepare("SELECT * FROM pointsofinterest WHERE ID=?");
+    $check->execute([$post["poi_id"]]);
+
+    if ($row=$check->fetch()) {
+        $stmt = $conn->prepare("INSERT INTO poi_reviews (review, poi_id, approved) VALUES (?, ?, 0)");
+        $stmt->execute([$post["review"], $post["poi_id"]]);
+
+        $res->getBody()->write("<p class='wide'>Review added successfuly. Please wait for it to be approved.</p>");
+    }
+    else {
+        $res->getBody()->write("<p class='wide'>Something went wrong please try again.</p>");
+    };
+    
     return $res;
 });
 
-$app->get('/recommend', function (Request $req, Response $res, array $args) use($conn) {
+$app->post('/recommend', function (Request $req, Response $res) use($conn) {
+    $post = $req->getParsedBody();
+
     $statement = $conn->prepare("SELECT * from pointsofinterest WHERE name=?");
 
-    $statement->execute([$args["name"]]);
+    $statement->execute([$post["name"]]);
 
     if($row=$statement->fetch()) {
         $recommended = $row["recommended"] + 1;
@@ -51,10 +64,21 @@ $app->get('/recommend', function (Request $req, Response $res, array $args) use(
     // Send an SQL query to the database server
     $statement_two = $conn->prepare("UPDATE pointsofinterest SET recommended=? WHERE name=?" );
 
-    $statement_two->execute([$recommended, $args["name"]]);
+    $statement_two->execute([$recommended, $post["name"]]);
 
 
     $res->getBody()->write("<input disabled type='submit' value='&check;' title='Recommend Me'>");
+    return $res;
+});
+
+$app->post('/approve_review', function (Request $req, Response $res) use($conn) {
+    $post = $req->getParsedBody();
+
+    $stmt = $conn->prepare("UPDATE poi_reviews SET approved=1 WHERE id=?");
+    $stmt->execute([$post["id"]]);
+
+    $res->getBody()->write("<input type='submit' value='Approved' disabled class='card'/>");
+    
     return $res;
 });
 

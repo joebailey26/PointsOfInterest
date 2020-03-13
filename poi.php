@@ -51,7 +51,7 @@ if (ctype_alnum(trim(str_replace(' ','',$_GET["name"])))) {
                         <label>
                             <h2 class='wide'>Add Review:</h2>
                             <input type='hidden' value='$poi_id' name='poi_id' id='poi_id'/>
-                            <textarea type='text' placeholder='This is an epic place' required class='card' name='review' id='review'></textarea>
+                            <textarea type='text' placeholder='This is an epic place' required class='card' name='review' id='review' required></textarea>
                         </label>
                         <input type='submit' value='Submit!' class='card'/>
                     </form>
@@ -84,9 +84,11 @@ foot();
 
         xhr2.addEventListener ("load", responseReceived_recommend);
 
-        xhr2.open('GET', 'slim/recommend?name=' + a);
+        xhr2.open('POST', 'slim/recommend');
 
-        xhr2.send();
+        xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        xhr2.send('name=' + a);
 
         return false;
     }
@@ -113,10 +115,12 @@ foot();
         // We are sending a request to "flights.php" in the same folder
         // and passing in the 
         // destination and date as a query string. 
-        xhr2.open('GET', 'slim/add_review?review=' + a + '&poi_id=' + b);
+        xhr2.open('POST', 'slim/add_review');
+
+        xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
         // Send the request.
-        xhr2.send();
+        xhr2.send('review=' + a + '&poi_id=' + b);
 
         return false;
     }

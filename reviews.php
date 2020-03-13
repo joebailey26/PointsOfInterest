@@ -14,13 +14,20 @@
             echo "<div class='container constrained'>";
         
             while ($row=$statement->fetch()) {
-                echo "<article class='poi card wide single'>
-                        <p>".$row["review"]."</p>
-                        <form action='reviews_results.php' method='POST'>
-                            <input type='hidden' value='".$row["id"]."' name='review_id'/>
-                            <input type='submit' value='Approve'/>
-                        </form>
-                    </article>";
+                $id = $row["id"];
+                $review = $row["review"];
+                $statement_two = $conn->query("select * from pointsofinterest where ID=$id");
+
+                while ($row=$statement_two->fetch()) {
+                    echo "<article class='poi card wide single'>
+                            <h3>".$row["name"]."</h3>
+                            <p>$review</p>
+                            <form id='response' onsubmit='return ajaxrequest(event)'>
+                                <input type='hidden' value='$id' name='review_id' id='review_id'/>
+                                <input type='submit' value='Approve' class='card'/>
+                            </form>
+                        </article>";
+                }
             }
             echo "</div>";
         }
@@ -30,6 +37,30 @@
         };
 
         foot();
+    ?>
+    <script>
+        function ajaxrequest(event) {
+            event.preventDefault()
+
+            var xhr2 = new XMLHttpRequest();
+
+            var a = document.getElementById("review_id").value;
+
+            xhr2.addEventListener ("load", responseReceived);
+
+            xhr2.open('POST', 'slim/approve_review');
+
+            xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            xhr2.send('id=' + a);
+
+            return false;
+        }
+        function responseReceived(e) {
+            document.getElementById("response").innerHTML = e.target.responseText;
+        }
+    </script>
+    <?php    
     }
     else {
         header("Location: login.php");	
