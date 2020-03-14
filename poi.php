@@ -19,7 +19,7 @@ if (ctype_alnum(trim(str_replace(' ','',$_GET["name"])))) {
             head($name);
             echo "<div class='container constrained'>
                     <article class='poi card wide single'>
-                        <h1 class='title'>$name</h3>
+                        <h1 class='title'>$name</h1>
                         <p class='type'>".$row["type"]."</p>
                         <p class='description'>".$row["description"]."</p>
                         <form class='recommend' onsubmit='return ajaxrequest_recommend(event)' >

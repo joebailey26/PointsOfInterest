@@ -58,7 +58,7 @@ $app->post('/add_review', function (Request $req, Response $res) use($conn) {
 $app->post('/recommend', function (Request $req, Response $res) use($conn) {
     $post = $req->getParsedBody();
 
-    $statement = $conn->prepare("SELECT * from pointsofinterest WHERE name=?");
+    $statement = $conn->prepare("SELECT * FROM pointsofinterest WHERE name=?");
 
     $statement->execute([$post["name"]]);
 
@@ -85,6 +85,32 @@ $app->post('/approve_review', function (Request $req, Response $res) use($conn) 
     $res->getBody()->write("<input type='submit' value='Approved' disabled class='card'/>");
     
     return $res;
+});
+
+$app->get('/search', function (Request $req, Response $res, array $args) use($conn) {
+    $stmt = $conn->prepare("SELECT * FROM pointsofinterest");
+    $stmt->execute([$args["search"]]);
+
+    $response = array();
+
+    while($row=$stmt->fetch()) {
+        array_push($response, $row["name"]);
+    };
+    
+    return $res->withJson($response);
+});
+
+$app->get('/search/{search}', function (Request $req, Response $res, array $args) use($conn) {
+    $stmt = $conn->prepare("SELECT * FROM pointsofinterest WHERE region=?");
+    $stmt->execute([$args["search"]]);
+
+    $response = array();
+
+    while($row=$stmt->fetch()) {
+        $response[] = $row;
+    };
+
+    return $res->withJson($response);
 });
 
 $app->run();
