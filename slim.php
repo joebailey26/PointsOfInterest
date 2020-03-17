@@ -34,7 +34,7 @@ $view = new \Slim\Views\PhpRenderer('views');
 $app->post('/add_review', function (Request $req, Response $res) use($conn) {
     $post = $req->getParsedBody();
 
-    if (ctype_alnum(trim(str_replace(' ','',$_POST["review"])))) {
+    if (ctype_alnum(trim(str_replace(' ','',$post["review"])))) {
         $check = $conn->prepare("SELECT * FROM pointsofinterest WHERE ID=?");
         $check->execute([$post["poi_id"]]);
 
