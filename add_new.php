@@ -19,6 +19,10 @@ if (isset($_SESSION["user"])) {
             <input class="card" type="text" required name="type" placeholder="City"/>
         </label>
         <label>
+            <p>Region:</p>
+            <input class="card" type="text" required name="region" placeholder="Outer Rim"/>
+        </label>
+        <label>
             <p>Description:</p>
             <textarea class="card" type="text" required name="description" placeholder="Mos Eisley is a spaceport town, located on the planet Tatooine"></textarea>
         </label>

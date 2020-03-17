@@ -21,6 +21,7 @@ if (ctype_alnum(trim(str_replace(' ','',$_GET["name"])))) {
                     <article class='poi card wide single'>
                         <h1 class='title'>$name</h1>
                         <p class='type'>".$row["type"]."</p>
+                        <p class='region'>".$row["region"]."</p>
                         <p class='description'>".$row["description"]."</p>
                         <form class='recommend' onsubmit='return recommend(event)' >
                             <input name='name' id='recommend_name' type='hidden' value='$name' />
