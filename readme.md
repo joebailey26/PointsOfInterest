@@ -52,4 +52,4 @@ DATABASE_PASS="db_pass"
 
 ## Future Ideas
 
-[ ] Don't allow users to create POI with same name, instead update. Similarly with users. 
+- [ ] Don't allow users to create POI with same name, instead update. Similarly with users. 
