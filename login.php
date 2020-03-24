@@ -16,7 +16,7 @@
             Password:
             <input type="password" required class="card" name="password" />
         </label>
-        <input type="submit" value="Sign Up!" class="card"/>
+        <input type="submit" value="Log In!" class="card"/>
     </form>
 <?php 
     }
