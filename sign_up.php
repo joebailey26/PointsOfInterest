@@ -7,13 +7,8 @@
 <div class="container constrained">
 <?php
     if (!isset($_SESSION["user"])) {
-        if ($_GET["ref"]) {
-            if ($_GET["ref"]) {
-                echo "<h1 class='wide'>You need an account to add a new POI</h1>";
-            }
-            else {
-                echo "<h1 class='wide'>You need an account to access that page</h1>";
-            }
+        if ($_GET["ref"] == "add_new") {
+            echo "<h1 class='wide'>You need an account to add a new POI</h1>";
         }
         else {
             echo "<h1 class='wide'>Create an account for Points Of Interest</h1>";
